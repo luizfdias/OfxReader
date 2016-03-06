@@ -10,15 +10,16 @@ namespace Nibo.OfxReader.Tests
         [TestMethod]
         public void Transaction_DeveConstruirUmaTransacaoAPartirDeUmBloco_DeveRetornarUmaTransacao()
         {
-            var transaction = new Transaction(@"<STMTTRN><TRNTYPE>DEBIT<DTPOSTED>20140401100000[-03:EST]<TRNAMT>-4500.00<FITID>20140401001<CHECKNUM>20140401001<MEMO>TBI 0304.40719-0     C/C</STMTTRN>");
+            var transaction = new TransactionFile(@"<STMTTRN><TRNTYPE>DEBIT<DTPOSTED>20140401100000[-03:EST]<TRNAMT>-4500.00<FITID>20140401001<CHECKNUM>20140401001<MEMO>TBI 0304.40719-0     C/C</STMTTRN>");
 
-            var postDateExpected = new DateTime(2014, 4, 1);
-            var amountExpected = -450000;
-            var FitIdExpected = 20140401001;
-            var CheckNumExpected = 20140401001;
+            var typeExpected = "DEBIT";
+            var postDateExpected = "20140401100000[-03:EST]";
+            var amountExpected = "-4500.00";
+            var FitIdExpected = "20140401001";
+            var CheckNumExpected = "20140401001";
             var MemoExpected = "TBI 0304.40719-0     C/C";
 
-            transaction.Type.Should().Be(TransactionType.Debit);
+            transaction.Type.Should().Be(typeExpected);
             transaction.PostDate.Should().Be(postDateExpected);
             transaction.Amount.Should().Be(amountExpected);
             transaction.FitId.Should().Be(FitIdExpected);

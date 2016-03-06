@@ -1,4 +1,4 @@
-﻿namespace Nibo.OfxReader
+﻿namespace Nibo.OfxReader.Website.Models
 {
     public enum TransactionType
     {

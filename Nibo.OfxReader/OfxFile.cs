@@ -8,9 +8,9 @@ namespace Nibo.OfxReader
 {
     public static class OfxFile
     {
-        public static BankAccount Reader(string fullFileName)
+        public static BankAccountFile Reader(string fullFileName)
         {
-            BankAccount bankAccount = null;
+            BankAccountFile bankAccount = null;
 
             using (var reader = new StreamReader(fullFileName))
             {
@@ -32,7 +32,7 @@ namespace Nibo.OfxReader
 
                         bankAccountBlock.AppendLine(line);
 
-                        bankAccount = new BankAccount(bankAccountBlock.ToString());
+                        bankAccount = new BankAccountFile(bankAccountBlock.ToString());
                     }
 
                     if (line.Contains("<STMTTRN>"))
@@ -52,7 +52,9 @@ namespace Nibo.OfxReader
 
                         transactionBlock.AppendLine(line);
 
-                        bankAccount.Transactions.Add(new Transaction(transactionBlock.ToString()));
+                        bankAccount.Transactions.Add(new TransactionFile(transactionBlock.ToString()));
+
+                        transactionBlock.Clear();
                     }
                 }
             }

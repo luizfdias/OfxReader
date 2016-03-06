@@ -35,8 +35,8 @@ namespace Nibo.OfxReader.Tests
 
             var bankAccount = OfxFile.Reader(fullFileName);
 
-            var bankIdExpected = 341;
-            var accountNumberExpected = 7037300576;
+            var bankIdExpected = "0341";
+            var accountNumberExpected = "7037300576";
 
             bankAccount.Should().NotBeNull();
             bankAccount.BankId.Should().Be(bankIdExpected);
@@ -52,8 +52,8 @@ namespace Nibo.OfxReader.Tests
 
             var bankAccount = OfxFile.Reader(fullFileName);
 
-            var bankIdExpected = 33;
-            var accountNumberExpected = 4360010011321;
+            var bankIdExpected = "033";
+            var accountNumberExpected = "4360010011321";
 
             bankAccount.Should().NotBeNull();
             bankAccount.BankId.Should().Be(bankIdExpected);
@@ -69,8 +69,8 @@ namespace Nibo.OfxReader.Tests
 
             var bankAccount = OfxFile.Reader(fullFileName);
 
-            var bankIdExpected = 341;
-            var accountNumberExpected = 7037300576;
+            var bankIdExpected = "0341";
+            var accountNumberExpected = "7037300576";
 
             bankAccount.Should().NotBeNull();
             bankAccount.BankId.Should().Be(bankIdExpected);
@@ -86,8 +86,8 @@ namespace Nibo.OfxReader.Tests
 
             var bankAccount = OfxFile.Reader(fullFileName);
 
-            var bankIdExpected = 341;
-            var accountNumberExpected = 0304407190;
+            var bankIdExpected = "0341";
+            var accountNumberExpected = "0304407190";
 
             bankAccount.Should().NotBeNull();
             bankAccount.BankId.Should().Be(bankIdExpected);
