@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
 using System.IO;
 using Nibo.OfxReader.Tests.Helpers;
-using Nibo.OfxReader.Exceptions;
 
 namespace Nibo.OfxReader.Tests
 {
@@ -33,14 +32,22 @@ namespace Nibo.OfxReader.Tests
 
             OfxFileCreater.Create(fullFileName, FileContent.GetItauFileContent());
 
-            var bankAccount = OfxFile.Reader(fullFileName);
+            var bankStatementFile = OfxFile.Reader(fullFileName);
 
+            var startDateExpected = "20140401100000[-03:EST]";
+            var endDateExpected = "20140430100000[-03:EST]";
             var bankIdExpected = "0341";
             var accountNumberExpected = "7037300576";
 
-            bankAccount.Should().NotBeNull();
-            bankAccount.BankId.Should().Be(bankIdExpected);
-            bankAccount.Number.Should().Be(accountNumberExpected);
+            var transactionsCountExpected = 32;
+
+            bankStatementFile.StartDate.Should().Be(startDateExpected);
+            bankStatementFile.EndDate.Should().Be(endDateExpected);
+
+            bankStatementFile.BankAccountFile.Should().NotBeNull();
+            bankStatementFile.BankAccountFile.BankId.Should().Be(bankIdExpected);
+            bankStatementFile.BankAccountFile.Number.Should().Be(accountNumberExpected);
+            bankStatementFile.BankAccountFile.Transactions.Count.Should().Be(transactionsCountExpected);
         }
 
         [TestMethod]
@@ -50,14 +57,22 @@ namespace Nibo.OfxReader.Tests
 
             OfxFileCreater.Create(fullFileName, FileContent.GetSantanderFileContent());
 
-            var bankAccount = OfxFile.Reader(fullFileName);
+            var bankStatementFile = OfxFile.Reader(fullFileName);
 
+            var startDateExpected = "20140319105300[-3:GMT]";
+            var endDateExpected = "20140319105300[-3:GMT]";
             var bankIdExpected = "033";
             var accountNumberExpected = "4360010011321";
+            var transactionsCountExpected = 44;
 
-            bankAccount.Should().NotBeNull();
-            bankAccount.BankId.Should().Be(bankIdExpected);
-            bankAccount.Number.Should().Be(accountNumberExpected);
+            bankStatementFile.StartDate.Should().Be(startDateExpected);
+            bankStatementFile.EndDate.Should().Be(endDateExpected);
+
+            bankStatementFile.BankAccountFile.Should().NotBeNull();
+            bankStatementFile.BankAccountFile.BankId.Should().Be(bankIdExpected);
+            bankStatementFile.BankAccountFile.Number.Should().Be(accountNumberExpected);
+
+            bankStatementFile.BankAccountFile.Transactions.Count.Should().Be(transactionsCountExpected);
         }
 
         [TestMethod]
@@ -67,14 +82,22 @@ namespace Nibo.OfxReader.Tests
 
             OfxFileCreater.Create(fullFileName, FileContent.GetExtrato1FileContent());
 
-            var bankAccount = OfxFile.Reader(fullFileName);
+            var bankStatementFile = OfxFile.Reader(fullFileName);
 
+            var startDateExpected = "20140102100000[-03:EST]";
+            var endDateExpected = "20140318100000[-03:EST]";
             var bankIdExpected = "0341";
             var accountNumberExpected = "7037300576";
+            var transactionsCountExpected = 94;
 
-            bankAccount.Should().NotBeNull();
-            bankAccount.BankId.Should().Be(bankIdExpected);
-            bankAccount.Number.Should().Be(accountNumberExpected);
+            bankStatementFile.StartDate.Should().Be(startDateExpected);
+            bankStatementFile.EndDate.Should().Be(endDateExpected);
+
+            bankStatementFile.BankAccountFile.Should().NotBeNull();
+            bankStatementFile.BankAccountFile.BankId.Should().Be(bankIdExpected);
+            bankStatementFile.BankAccountFile.Number.Should().Be(accountNumberExpected);
+
+            bankStatementFile.BankAccountFile.Transactions.Count.Should().Be(transactionsCountExpected);
         }
 
         [TestMethod]
@@ -84,25 +107,22 @@ namespace Nibo.OfxReader.Tests
 
             OfxFileCreater.Create(fullFileName, FileContent.GetExtrato2FileContent());
 
-            var bankAccount = OfxFile.Reader(fullFileName);
+            var bankStatementFile = OfxFile.Reader(fullFileName);
 
+            var startDateExpected = "20140605100000[-03:EST]";
+            var endDateExpected = "20140619100000[-03:EST]";
             var bankIdExpected = "0341";
             var accountNumberExpected = "0304407190";
+            var transactionsCountExpected = 28;
 
-            bankAccount.Should().NotBeNull();
-            bankAccount.BankId.Should().Be(bankIdExpected);
-            bankAccount.Number.Should().Be(accountNumberExpected);
-        }
+            bankStatementFile.StartDate.Should().Be(startDateExpected);
+            bankStatementFile.EndDate.Should().Be(endDateExpected);
 
-        [TestMethod]
-        [ExpectedException(typeof(BankAccountNotFoundException))]
-        public void Read_DeveLerExceptionCasoArquivoNaoTenhaDadosDaConta_DeveRetornarBankAccountNotFoundException()
-        {
-            var fullFileName = Path.Combine(this._ofxFilePath, "Extrato_OFX_" + Guid.NewGuid() + ".ofx");
+            bankStatementFile.BankAccountFile.Should().NotBeNull();
+            bankStatementFile.BankAccountFile.BankId.Should().Be(bankIdExpected);
+            bankStatementFile.BankAccountFile.Number.Should().Be(accountNumberExpected);
 
-            OfxFileCreater.Create(fullFileName, FileContent.GetExtratoWithoutAccountInformation());
-
-            var bankAccount = OfxFile.Reader(fullFileName);            
+            bankStatementFile.BankAccountFile.Transactions.Count.Should().Be(transactionsCountExpected);
         }
 
         [TestCleanup]

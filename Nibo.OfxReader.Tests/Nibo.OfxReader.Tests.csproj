@@ -60,12 +60,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BankAccountTest.cs" />
     <Compile Include="Helpers\FileContent.cs" />
     <Compile Include="Helpers\OfxFileCreater.cs" />
     <Compile Include="OfxFileTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TransactionTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Nibo.OfxReader\Nibo.OfxReader.csproj">

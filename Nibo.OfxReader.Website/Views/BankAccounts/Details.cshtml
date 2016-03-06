@@ -14,18 +14,18 @@
     <table class="table table-striped">        
         <tr>
             <th>Data da postagem</th>
-            <th>Valor da transação</th>
-            <th>CheckNum</th>
             <th>Descrição</th>
+            <th>Valor da transação</th>
+            <th>CheckNum</th>            
         </tr>
 
         @foreach (var item in Model.Transactions.OrderBy(x => x.PostDate))
             {
             <tr>
                 <td>@item.PostDate</td>
-                <td>@item.Amount</td>
-                <td>@item.CheckNum</td>
                 <td>@item.Memo</td>
+                <td>@item.Amount</td>                
+                <td>@item.CheckNum</td>                
             </tr>
         }
 

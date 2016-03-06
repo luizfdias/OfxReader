@@ -19,8 +19,8 @@ namespace Nibo.OfxReader.Website.Services
         {
             await Task.Run(() =>
             {
-                var bankAccountFile = OfxFile.Reader(fullFileName);
-                var bankAccount = new BankAccount(bankAccountFile);
+                var bankStatementFile = OfxFile.Reader(fullFileName);
+                var bankAccount = new BankAccount(bankStatementFile.BankAccountFile);
 
                 var bankAccountFromContext = this._bankStatementContext.BankAccounts.AddIfNotExists(bankAccount, x => x.BankId == bankAccount.BankId && x.Number == bankAccount.Number);
 
