@@ -7,30 +7,36 @@
 
 <h2>Contas bancárias</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            Código do banco
-        </th>
-        <th>
-            Número da conta
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+@if (!Model.Any())
+{
+    <p>Nenhum extrato foi lido até o momento.</p>
+}
+else
+{
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BankId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Number)
-            </td>
-            <td>                
-                @Html.ActionLink("Abrir extrato", "Details", new { id = item.BankStatementId })
-            </td>
+            <th>
+                Código do banco
+            </th>
+            <th>
+                Número da conta
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BankId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number)
+                </td>
+                <td>
+                    @Html.ActionLink("Abrir extrato", "Details", new { id = item.BankStatementId })
+                </td>
+            </tr>
+        }
+    </table>
+}
