@@ -13,7 +13,9 @@ namespace Nibo.OfxReader.Website.Datalayer
 
         public DbSet<Transaction> Transactions { get; set; }
 
-        public DbSet<BankAccount> BankAccounts { get; set; }
+        public DbSet<BankStatement> BankStatements { get; set; }
+
+        public DbSet<LedgerBalance> LedgerBalances { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

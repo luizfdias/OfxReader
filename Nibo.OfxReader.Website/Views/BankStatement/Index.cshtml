@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Nibo.OfxReader.Website.Models.BankAccount>
+﻿@model IEnumerable<Nibo.OfxReader.Website.Models.BankStatement>
 
 @{
     ViewBag.Title = "Index";
@@ -28,7 +28,7 @@
                 @Html.DisplayFor(modelItem => item.Number)
             </td>
             <td>                
-                @Html.ActionLink("Details", "Details", new { id = item.BankAccountId, @class = "btn btn-default" })
+                @Html.ActionLink("Details", "Details", new { id = item.BankStatementId, @class = "btn btn-default" })
             </td>
         </tr>
     }

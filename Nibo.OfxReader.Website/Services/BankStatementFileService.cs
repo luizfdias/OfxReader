@@ -19,20 +19,29 @@ namespace Nibo.OfxReader.Website.Services
         {
             await Task.Run(() =>
             {
-                var bankStatementFile = OfxFile.Reader(fullFileName);
-                var bankAccount = new BankAccount(bankStatementFile.BankAccountFile);
+                var bankStatementFile = OfxFile.Read(fullFileName);
+                var bankStatement = new BankStatement(bankStatementFile);                
 
-                var bankAccountFromContext = this._bankStatementContext.BankAccounts.AddIfNotExists(bankAccount, x => x.BankId == bankAccount.BankId && x.Number == bankAccount.Number);
+                var bankStatementFromContext = this._bankStatementContext.BankStatements.AddIfNotExists(bankStatement, x => x.BankId == bankStatement.BankId && x.Number == bankStatement.Number);
 
-                foreach (var transaction in bankAccount.Transactions)
+                foreach (var transaction in bankStatement.Transactions)
                 {
-                    transaction.BankAccountId = bankAccountFromContext.BankAccountId;
+                    transaction.BankStatementId = bankStatementFromContext.BankStatementId;
 
                     this._bankStatementContext.Transactions.AddIfNotExists(
                         transaction, x =>
-                        x.BankAccount.BankAccountId == transaction.BankAccountId &&
+                        x.BankStatement.BankStatementId == transaction.BankStatementId &&
                         x.PostDate == transaction.PostDate &&
                         x.Amount == transaction.Amount);
+                }
+
+                foreach (var ledgerBalance in bankStatement.LedgerBalances)
+                {
+                    ledgerBalance.BankStatementId = bankStatementFromContext.BankStatementId;
+
+                    this._bankStatementContext.LedgerBalances.AddIfNotExists(ledgerBalance, x =>
+                        x.BalanceDate == ledgerBalance.BalanceDate &&
+                        x.BankStatement.BankStatementId == ledgerBalance.BankStatementId);
                 }
 
 

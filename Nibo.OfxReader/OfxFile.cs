@@ -9,7 +9,7 @@ namespace Nibo.OfxReader
         private const string _OFX_STARTBLOCK = "<OFX>";
         private const string _OFX_ENDBLOCK = "</OFX>";
 
-        public static BankStatementFile Reader(string fullFileName)
+        public static BankStatementFile Read(string fullFileName)
         {
             BankStatementFile bankStatementFile = null;            
 

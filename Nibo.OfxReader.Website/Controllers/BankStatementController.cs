@@ -8,17 +8,18 @@ using System.Web;
 using System.Web.Mvc;
 using Nibo.OfxReader.Website.Datalayer;
 using Nibo.OfxReader.Website.Models;
+using Nibo.OfxReader.Website.Models.Reports;
 
 namespace Nibo.OfxReader.Website.Controllers
 {
-    public class BankAccountsController : Controller
+    public class BankStatementController : Controller
     {
         private BankStatementContext db = new BankStatementContext();
 
         // GET: BankAccounts
         public ActionResult Index()
         {
-            return View(db.BankAccounts.ToList());
+            return View(db.BankStatements.ToList());
         }
 
         // GET: BankAccounts/Details/5
@@ -28,12 +29,15 @@ namespace Nibo.OfxReader.Website.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BankAccount bankAccount = db.BankAccounts.Find(id);
-            if (bankAccount == null)
+            BankStatement bankStatement = db.BankStatements.Find(id);
+            if (bankStatement == null)
             {
                 return HttpNotFound();
             }
-            return View(bankAccount);
+
+            var bankStatementDetail = new BankStatementDetail(bankStatement);
+
+            return View(bankStatementDetail);
         }
 
         protected override void Dispose(bool disposing)

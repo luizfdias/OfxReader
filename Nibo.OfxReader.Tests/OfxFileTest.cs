@@ -32,7 +32,7 @@ namespace Nibo.OfxReader.Tests
 
             OfxFileCreater.Create(fullFileName, FileContent.GetItauFileContent());
 
-            var bankStatementFile = OfxFile.Reader(fullFileName);
+            var bankStatementFile = OfxFile.Read(fullFileName);
 
             var startDateExpected = "20140401100000[-03:EST]";
             var endDateExpected = "20140430100000[-03:EST]";
@@ -57,7 +57,7 @@ namespace Nibo.OfxReader.Tests
 
             OfxFileCreater.Create(fullFileName, FileContent.GetSantanderFileContent());
 
-            var bankStatementFile = OfxFile.Reader(fullFileName);
+            var bankStatementFile = OfxFile.Read(fullFileName);
 
             var startDateExpected = "20140319105300[-3:GMT]";
             var endDateExpected = "20140319105300[-3:GMT]";
@@ -82,7 +82,7 @@ namespace Nibo.OfxReader.Tests
 
             OfxFileCreater.Create(fullFileName, FileContent.GetExtrato1FileContent());
 
-            var bankStatementFile = OfxFile.Reader(fullFileName);
+            var bankStatementFile = OfxFile.Read(fullFileName);
 
             var startDateExpected = "20140102100000[-03:EST]";
             var endDateExpected = "20140318100000[-03:EST]";
@@ -107,7 +107,7 @@ namespace Nibo.OfxReader.Tests
 
             OfxFileCreater.Create(fullFileName, FileContent.GetExtrato2FileContent());
 
-            var bankStatementFile = OfxFile.Reader(fullFileName);
+            var bankStatementFile = OfxFile.Read(fullFileName);
 
             var startDateExpected = "20140605100000[-03:EST]";
             var endDateExpected = "20140619100000[-03:EST]";

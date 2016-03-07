@@ -134,14 +134,14 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\BankAccounts\Index.cshtml" />
-    <Content Include="Views\BankAccounts\Details.cshtml" />
+    <Content Include="Views\BankStatement\Index.cshtml" />
+    <Content Include="Views\BankStatement\Details.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\BankAccountsController.cs" />
+    <Compile Include="Controllers\BankStatementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Datalayer\BankStatementContext.cs" />
     <Compile Include="Datalayer\BankStatementInitializer.cs" />
@@ -150,7 +150,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BankAccount.cs" />
+    <Compile Include="Models\BankStatement.cs" />
+    <Compile Include="Models\LedgerBalance.cs" />
+    <Compile Include="Models\Reports\BankPosting.cs" />
+    <Compile Include="Models\Reports\BankStatementDetail.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\TransactionType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
