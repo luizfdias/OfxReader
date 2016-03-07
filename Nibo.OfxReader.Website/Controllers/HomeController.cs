@@ -31,7 +31,8 @@ namespace Nibo.OfxReader.Website.Controllers
 
                 if (!fileName.EndsWith(".ofx", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    return Json("{ Mesagem : 'Formato de arquivo inválido'}");
+                    ModelState.AddModelError("", "Formato de arquivo inválido");
+                    return View();              
                 }
 
                 var path = Path.Combine(Server.MapPath("~/App_Data/ofxfiles"), fileName);
