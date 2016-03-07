@@ -14,7 +14,7 @@ namespace Nibo.OfxReader.Website.Controllers
     public class HomeController : Controller
     {
         [Inject]
-        public IBankStatementFileService BankStatementFileService { get; set; }
+        public virtual IBankStatementFileService BankStatementFileService { get; set; }
 
         // GET: Home
         public ActionResult Index()
