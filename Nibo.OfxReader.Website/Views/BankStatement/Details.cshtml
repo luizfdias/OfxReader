@@ -1,0 +1,62 @@
+﻿@model Nibo.OfxReader.Website.Models.Reports.BankStatementDetail
+@using Nibo.OfxReader.Website.Extensions;
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1>Detalhes da conta <small>Banco: @Html.DisplayFor(model => model.BankId) | Conta bancária: @Html.DisplayFor(model => model.AccountNumber)</small></h1>
+</div>
+
+<div>
+
+    <table class="table table-striped">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Data da postagem</th>
+                <th>Descrição</th>
+                <th>CheckNum</th>
+                <th>Valor da transação</th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model.BankPostingList.OrderBy(x => x.PostDate).ThenBy(x => x.IsBalance))
+        {
+            if (item.IsBalance)
+            {
+                if (item.Amount >= 0)
+                {
+                    <tr class="success">
+                        <td>@item.PostDate.ToString("dd-MM-yyyy")</td>
+                        <td colspan="2">Saldo da conta bancária</td>
+                        <td>@item.Amount.ToCurrency()</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="danger">
+                        <td>@item.PostDate.ToString("dd-MM-yyyy")</td>
+                        <td colspan="2">Saldo da conta bancária</td>
+                        <td>@item.Amount.ToCurrency()</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td>@item.PostDate.ToString("dd-MM-yyyy")</td>
+                    <td>@item.Memo</td>
+                    <td>@item.CheckNum</td>
+                    <td>@item.Amount.ToCurrency()</td>
+                </tr>
+            }
+        }
+
+    </table>
+
+</div>
+
+@Html.ActionLink("Voltar", "Index", "BankStatement", new { @class = "btn btn-default" })
+

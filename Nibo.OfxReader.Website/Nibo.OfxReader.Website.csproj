@@ -147,6 +147,7 @@
     <Compile Include="Datalayer\BankStatementInitializer.cs" />
     <Compile Include="Datalayer\Extensions\DbSetExtensions.cs" />
     <Compile Include="DependencyInjection\Kernel.cs" />
+    <Compile Include="Extensions\DecimalExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

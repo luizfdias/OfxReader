@@ -234,3 +234,7 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+/Nibo.OfxReader.Website/App_Data/ofxfiles/extrato1.ofx
+/Nibo.OfxReader.Website/App_Data/ofxfiles/extrato2.ofx
+/Nibo.OfxReader.Website/App_Data/ofxfiles/extrato_itau_201404.ofx
+/Nibo.OfxReader.Website/App_Data/ofxfiles/extrato_santander.ofx
